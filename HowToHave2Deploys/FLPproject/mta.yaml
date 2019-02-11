@@ -1,0 +1,29 @@
+ID: FLPproject
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: FLPproject_appRouter
+    type: nodejs
+    path: FLPproject_appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: rt_FLPproject_appRouter
+      - name: uaa_FLPproject
+resources:
+  - name: rt_FLPproject_appRouter
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: dt_UIproject_ui_deployer
+    type: org.cloudfoundry.existing-service
+  - name: uaa_FLPproject
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service

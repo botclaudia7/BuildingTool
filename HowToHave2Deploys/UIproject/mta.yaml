@@ -1,0 +1,30 @@
+ID: UIproject
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+ 
+  - name: UIproject_ui_deployer
+    type: com.sap.html5.application-content
+    path: UIproject_ui_deployer
+    requires:
+      - name: dt_UIproject_ui_deployer
+    build-parameters:
+      requires:
+        - name: UI
+          artifacts:
+            - './*'
+          target-path: resources/UI
+  - name: UI
+    type: html5
+    path: UI
+    build-parameters:
+      builder: grunt
+resources:
+  - name: dt_UIproject_ui_deployer
+    optional: true
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
