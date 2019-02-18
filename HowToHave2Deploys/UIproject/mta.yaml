@@ -4,7 +4,6 @@ parameters:
   deploy_mode: html5-repo
 version: 0.0.1
 modules:
- 
   - name: UIproject_ui_deployer
     type: com.sap.html5.application-content
     path: UIproject_ui_deployer
@@ -16,6 +15,9 @@ modules:
           artifacts:
             - './*'
           target-path: resources/UI
+    parameters:
+      disc-quota: 1024M
+      memory: 1024M
   - name: UI
     type: html5
     path: UI
@@ -23,8 +25,9 @@ modules:
       builder: grunt
 resources:
   - name: dt_UIproject_ui_deployer
-    optional: true
     parameters:
+      config:
+        sizeLimit: 73
       service-plan: app-host
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
